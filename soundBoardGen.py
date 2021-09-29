@@ -24,6 +24,7 @@ VBAudioVoicemeeterMacroButtonMap = ET.Element('VBAudioVoicemeeterMacroButtonMap'
 
 tree.write('output.xml')
 
+
 #<?xml version="1.0" encoding="utf-8"?>
 #<VBAudioVoicemeeterMacroButtonMap>
 #<MacroButtonConfiguration x0='681' y0='304' dx='873' dy='576' >
