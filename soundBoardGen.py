@@ -3,7 +3,7 @@ import os
 import xml.etree.ElementTree as ET
 import sys
 
-path = r"C:\Users\rblum\Google Drive\Game Files\soundBoard\Apex\*.mp3"
+path = r"C:\Users\rblum\Google Drive\Game Files\soundBoard\Apex\*.*"
 soundPath = glob.glob( path )
 
 i = 0
@@ -37,8 +37,9 @@ while i < len(soundPath):
 buttonMap = ET.ElementTree(VBAudioVoicemeeterMacroButtonMap)
 ET.indent(buttonMap, space=" ", level=0)
 buttonMap.write(r'C:\Users\rblum\Google Drive\Game Files\soundBoard\Apex\output.xml', encoding='utf8', method='xml')
+print("button map written to " + path)
 
-
+#Full Example
 #<?xml version="1.0" encoding="utf-8"?>
 #<VBAudioVoicemeeterMacroButtonMap>
 #<MacroButtonConfiguration x0='681' y0='304' dx='873' dy='576' >
@@ -55,3 +56,25 @@ buttonMap.write(r'C:\Users\rblum\Google Drive\Game Files\soundBoard\Apex\output.
 #    macrobuttons 2-80
 #</MacroButtonConfiguration>
 #</VBAudioVoicemeeterMacroButtonMap>
+
+#load alternate buttons example
+#<MacroButton index='1' type='0' color='3' key='85' ctrl='0' shift='0' alt='0' anyway='0' exclusive='0' trigger='0' xinput='0' >
+#		<MB_MIDI b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' />
+#		<MB_TRIGGER tchannel='0' tin='0.0' tout='0.0' tmsHold='100' tafterMute='0' />
+#		<MB_XINPUT nctrl='0' nbutton='0' />
+#		<MB_Name>Apex 1</MB_Name>
+#		<MB_Subname></MB_Subname>
+#		<MB_InitRequest></MB_InitRequest>
+#		<MB_OnRequest>Load("C:\Users\rblum\Google Drive\Game Files\soundBoard\Apex\output.xml")</MB_OnRequest>
+#		<MB_OffRequest></MB_OffRequest>
+#	</MacroButton>
+#	<MacroButton index='2' type='0' color='3' key='85' ctrl='0' shift='0' alt='0' anyway='0' exclusive='0' trigger='0' xinput='0' >
+#		<MB_MIDI b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' />
+#		<MB_TRIGGER tchannel='0' tin='0.0' tout='0.0' tmsHold='100' tafterMute='0' />
+#		<MB_XINPUT nctrl='0' nbutton='0' />
+#		<MB_Name>Apex 2</MB_Name>
+#		<MB_Subname></MB_Subname>
+#		<MB_InitRequest></MB_InitRequest>
+#		<MB_OnRequest>Load("C:\Users\rblum\Google Drive\Game Files\soundBoard\Apex\output2.xml")</MB_OnRequest>
+#		<MB_OffRequest></MB_OffRequest>
+#

@@ -1,0 +1,3 @@
+[Config File]
+#input soundBoard directory as soundBoardPath
+soundBoardPath = C:\Users\rblum\Google Drive\Game Files\soundBoard\Soundboards\
