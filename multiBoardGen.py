@@ -53,11 +53,15 @@ def checkExisting():
 def fitToGrid(n, b):
     digits = ""
     if n == 0:
-        return 0
+        digits = "0"
+        digits = str(int(digits)+1)
+        return digits
     while n:
         digits = str(n % b) + digits
         n //= b
+    digits = str(int(digits)+1)
     return digits
+
 
 def boardButton():
     MacroButton = ET.SubElement(MacroButtonConfiguration, 'MacroButton', index=indexNumber, type='0', color=buttonColor, key='0', ctrl='0', shift='0', alt='0', anyway='0', exclusive='0', trigger='0', xinput='0' )
@@ -78,6 +82,7 @@ def soundButton():
     if debug is True:
         print ("sound button index #: " + str(soundButtonLoop))
         print ("sound file is: " + soundList[soundButtonLoop])
+        print ("sound board index number is:" +str(indexNumber))
     MacroButton = ET.SubElement(MacroButtonConfiguration, 'MacroButton', index=indexNumber, type='0', color=buttonColor, key='85', ctrl='0', shift='0', alt='0', anyway='0', exclusive='0', trigger='0', xinput='0' )
     MB_MIDI = ET.SubElement( MacroButton, 'MB_MIDI', b1='00', b2='00', b3='00', b4='00', b5='00', b6='00')
     MB_TRIGGER = ET.SubElement( MacroButton, 'MB_TRIGGER', tchannel='0', tin='0.0', tout='0.0', tmsHold='100', tafterMute='0')
@@ -137,16 +142,16 @@ while boardLoop < len(boardList):
             buttonColor = currentBoardButtonColor
             #print("current board found")
         boardButton()
+        indexNumber = fitToGrid(indexCounter,len(boardList))
         indexCounter +=1
-        indexNumber = str(indexCounter)
         boardButtonLoop +=1
 
     soundButtonLoop = 0
     while soundButtonLoop < len(soundList):
        buttonColor=soundButtonColor
        soundButton()
+       indexNumber = fitToGrid(indexCounter,len(boardList))
        indexCounter +=1
-       indexNumber = str(fitToGrid(indexCounter,len(boardList)))
        soundButtonLoop +=1
     writeBoard()
 
