@@ -49,6 +49,15 @@ def checkExisting():
             os.remove(testFileList[i])
             i +=1
 
+def fitToGrid(n, b):
+    digits = ""
+    if n == 0:
+        return 0
+    while n:
+        digits = str(n % b) + digits
+        n //= b
+    return digits
+
 def boardButton():
     MacroButton = ET.SubElement(MacroButtonConfiguration, 'MacroButton', index=indexNumber, type='0', color=buttonColor, key='0', ctrl='0', shift='0', alt='0', anyway='0', exclusive='0', trigger='0', xinput='0' )
     MB_MIDI = ET.SubElement( MacroButton, 'MB_MIDI', b1='00', b2='00', b3='00', b4='00', b5='00', b6='00')
@@ -134,7 +143,7 @@ while boardLoop < len(boardList):
        buttonColor=soundButtonColor
        soundButton()
        indexCounter +=1
-       indexNumber = str(indexCounter)
+       indexNumber = str(fitToGrid(indexCounter,len(boardList)))
        soundButtonLoop +=1
     writeBoard()
     boardLoop +=1
