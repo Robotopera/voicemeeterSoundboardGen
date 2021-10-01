@@ -20,6 +20,7 @@ def getConfig():
     soundButtonColor = configparser.get('Config File', 'soundButtonColor')
     debug = configparser.get('Config File', 'debug')
 
+
 def setBoardList():
     global boardList
     print(soundBoardPath)
@@ -74,8 +75,9 @@ def boardButton():
     MB_OffRequest = ET.SubElement( MacroButton, 'MB_OffRequest')
 
 def soundButton():
-    print ("sound button index #: " + str(soundButtonLoop))
-    print ("sound file is: " + soundList[soundButtonLoop])
+    if debug is True:
+        print ("sound button index #: " + str(soundButtonLoop))
+        print ("sound file is: " + soundList[soundButtonLoop])
     MacroButton = ET.SubElement(MacroButtonConfiguration, 'MacroButton', index=indexNumber, type='0', color=buttonColor, key='85', ctrl='0', shift='0', alt='0', anyway='0', exclusive='0', trigger='0', xinput='0' )
     MB_MIDI = ET.SubElement( MacroButton, 'MB_MIDI', b1='00', b2='00', b3='00', b4='00', b5='00', b6='00')
     MB_TRIGGER = ET.SubElement( MacroButton, 'MB_TRIGGER', tchannel='0', tin='0.0', tout='0.0', tmsHold='100', tafterMute='0')
@@ -117,7 +119,8 @@ while boardLoop < len(boardList):
     soundPathMP3 = boardList[boardLoop] + "\\" + "*.mp3"
     soundPathWAV = boardList[boardLoop] + "\\" + "*.wav"
     soundList = glob.glob(soundPathMP3) + glob.glob(soundPathWAV)
-    print ("generating soundboard for directory: " + os.path.basename(boardList[boardLoop]) + " containing " + str(len(soundList)) + " sound files")
+    if debug is True:
+        print ("generating soundboard for directory: " + os.path.basename(boardList[boardLoop]) + " containing " + str(len(soundList)) + " sound files")
     #print ("search directory for sound files " + soundPath)
     indexCounter = 1
     indexNumber = str(indexCounter)
@@ -146,6 +149,7 @@ while boardLoop < len(boardList):
        indexNumber = str(fitToGrid(indexCounter,len(boardList)))
        soundButtonLoop +=1
     writeBoard()
+
     boardLoop +=1
 
 
