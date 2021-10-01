@@ -15,3 +15,4 @@ soundBoardPath = C:\Users\rblum\Google Drive\Game Files\soundBoard\Soundboards\
 boardButtonColor = 4
 currentBoardButtonColor = 5
 soundButtonColor = 0
+debug = false
