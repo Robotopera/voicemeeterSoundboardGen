@@ -14,11 +14,15 @@ def getConfig():
     global currentBoardButtonColor
     global soundButtonColor
     global debug
+    global xPosition
+    global yPosition
     soundBoardPath = configparser.get('Config File', 'soundBoardPath')
     boardButtonColor = configparser.get('Config File', 'boardButtonColor')
     currentBoardButtonColor = configparser.get('Config File', 'currentBoardButtonColor')
     soundButtonColor = configparser.get('Config File', 'soundButtonColor')
     debug = configparser.get('Config File', 'debug')
+    xPosition = configparser.get('Config File', 'xPosition')
+    yPosition = configparser.get('Config File', 'yPosition')
 
 
 def setBoardList():
@@ -111,6 +115,10 @@ def printFoundDirs():
         #print("writing button map file: " + soundBoardPath + os.path.basename(boardList[i])+".xml")
         i +=1
 
+def setBoardHeight():
+    global boardHeight
+    boardHeight = len(soundList)
+
 getConfig()
 checkExisting()
 setBoardList()
@@ -130,7 +138,7 @@ while boardLoop < len(boardList):
     indexCounter = 1
     indexNumber = str(indexCounter)
     VBAudioVoicemeeterMacroButtonMap = ET.Element('VBAudioVoicemeeterMacroButtonMap')
-    MacroButtonConfiguration = ET.SubElement(VBAudioVoicemeeterMacroButtonMap, 'MacroButtonConfiguration', x0='681', y0='304', dx=str(windowWidth), dy='576')
+    MacroButtonConfiguration = ET.SubElement(VBAudioVoicemeeterMacroButtonMap, 'MacroButtonConfiguration', x0=xPosition, y0=yPosition, dx=str(windowWidth), dy='576')
 
     boardButtonLoop = 0
     while boardButtonLoop < len(boardList):

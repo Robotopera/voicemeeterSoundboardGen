@@ -10,9 +10,11 @@
 # 7 = magenta
 # 8 = read
 #input soundBoard directory as soundBoardPath
-soundBoardPath = C:\Users\rblum\Google Drive\Game Files\soundBoard\Soundboards\
+soundBoardPath = C:\Users\robotopera\Documents\GoogleDrive\Game Files\soundBoard\Soundboards\
 #pick your colors
 boardButtonColor = 4
 currentBoardButtonColor = 5
 soundButtonColor = 0
 debug = false
+xPosition = 2571
+yPosition = 100
