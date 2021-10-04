@@ -8,6 +8,7 @@ configparser = configparser.RawConfigParser()
 
 def getConfig():
     configFilePath = 'config.txt'
+    configWindowLoc = 'windowConfig.txt'
     configparser.read(configFilePath)
     global soundBoardPath
     global boardButtonColor
@@ -23,7 +24,21 @@ def getConfig():
     debug = configparser.get('Config File', 'debug')
     xPosition = configparser.get('Config File', 'xPosition')
     yPosition = configparser.get('Config File', 'yPosition')
+    if checkExistingWindowConfig():
+        print("found window location config file: using these values")
+        configparser.read(configWindowLoc)
+        xPosition = configparser.get('Window Config', 'xPosition')
+        yPosition = configparser.get('Window Config', 'yPosition')
 
+
+def checkExistingWindowConfig():
+    configFilePath = os.path.abspath(os.path.join(os.path.dirname( __file__ ), 'windowConfig.txt'))
+    testFileList = []
+    testFileList = glob.glob(configFilePath)
+    if not testFileList:
+        return False
+    else:
+        return True
 
 def setBoardList():
     global boardList

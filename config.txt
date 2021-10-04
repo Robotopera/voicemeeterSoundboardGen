@@ -1,9 +1,20 @@
 [Config File]
-soundboardpath = C:\Users\robotopera\Documents\GoogleDrive\Game Files\soundBoard\Soundboards\
-boardbuttoncolor = 4
-currentboardbuttoncolor = 5
-soundbuttoncolor = 0
+#button colors
+# 0 = light blue
+# 1 = orange
+# 2 = yellow
+# 3 = green
+# 4 = teal
+# 5 = blue
+# 6 = dark blue
+# 7 = magenta
+# 8 = read
+#input soundBoard directory as soundBoardPath
+soundBoardPath = C:\Users\rblum\Google Drive\Game Files\soundBoard\Soundboards\
+#pick your colors
+boardButtonColor = 4
+currentBoardButtonColor = 5
+soundButtonColor = 0
 debug = false
-xposition = 2692
-yposition = 134
-
+xPosition = 2571
+yPosition = 100

@@ -1,0 +1,4 @@
+[Window Config]
+xposition = 2676
+yposition = 153
+
