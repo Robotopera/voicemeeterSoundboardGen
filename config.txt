@@ -8,13 +8,15 @@
 # 5 = blue
 # 6 = dark blue
 # 7 = magenta
-# 8 = read
+# 8 = red
 #input soundBoard directory as soundBoardPath
 soundBoardPath = C:\Users\rblum\Google Drive\Game Files\soundBoard\Soundboards\
 #pick your colors
 boardButtonColor = 4
 currentBoardButtonColor = 5
 soundButtonColor = 0
-debug = false
+debug = False
 xPosition = 2571
 yPosition = 100
+setKeyboardShortCuts = True
+rainbowButtons = False

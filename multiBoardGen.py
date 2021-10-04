@@ -17,6 +17,8 @@ def getConfig():
     global debug
     global xPosition
     global yPosition
+    global setKeyboardShortCuts
+    global rainbowButtons
     soundBoardPath = configparser.get('Config File', 'soundBoardPath')
     boardButtonColor = configparser.get('Config File', 'boardButtonColor')
     currentBoardButtonColor = configparser.get('Config File', 'currentBoardButtonColor')
@@ -24,6 +26,10 @@ def getConfig():
     debug = configparser.get('Config File', 'debug')
     xPosition = configparser.get('Config File', 'xPosition')
     yPosition = configparser.get('Config File', 'yPosition')
+    setKeyboardShortCuts = configparser.get('Config File', 'setKeyboardShortCuts')
+    rainbowButtons = configparser.get('Config File', 'rainbowButtons')
+    if rainbowButtons == "True":
+        soundButtonColor = 0
     if checkExistingWindowConfig():
         print("found window location config file: using these values")
         configparser.read(configWindowLoc)
@@ -81,7 +87,6 @@ def fitToGrid(n, b):
     digits = str(int(digits)+1)
     return digits
 
-
 def boardButton():
     MacroButton = ET.SubElement(MacroButtonConfiguration, 'MacroButton', index=indexNumber, type='0', color=buttonColor, key='0', ctrl='0', shift='0', alt='0', anyway='0', exclusive='0', trigger='0', xinput='0' )
     MB_MIDI = ET.SubElement( MacroButton, 'MB_MIDI', b1='00', b2='00', b3='00', b4='00', b5='00', b6='00')
@@ -98,11 +103,23 @@ def boardButton():
     MB_OffRequest = ET.SubElement( MacroButton, 'MB_OffRequest')
 
 def soundButton():
+    global runs
+    global button
+    global ctrl
+    global shift
+    global alt
     if debug is True:
         print ("sound button index #: " + str(soundButtonLoop))
         print ("sound file is: " + soundList[soundButtonLoop])
         print ("sound board index number is:" +str(indexNumber))
-    MacroButton = ET.SubElement(MacroButtonConfiguration, 'MacroButton', index=indexNumber, type='0', color=buttonColor, key='85', ctrl='0', shift='0', alt='0', anyway='0', exclusive='0', trigger='0', xinput='0' )
+    if setKeyboardShortCuts == "True":
+        getButton()
+    else:
+        button = "0"
+        ctrl = "0"
+        shift = "0"
+        alt = "0"
+    MacroButton = ET.SubElement(MacroButtonConfiguration, 'MacroButton', index=indexNumber, type='0', color=str(soundButtonColor), key=str(button), ctrl=ctrl, shift=shift, alt=alt, anyway='0', exclusive='0', trigger='0', xinput='0' )
     MB_MIDI = ET.SubElement( MacroButton, 'MB_MIDI', b1='00', b2='00', b3='00', b4='00', b5='00', b6='00')
     MB_TRIGGER = ET.SubElement( MacroButton, 'MB_TRIGGER', tchannel='0', tin='0.0', tout='0.0', tmsHold='100', tafterMute='0')
     MB_XINPUT = ET.SubElement( MacroButton, 'MB_XINPUT', nctrl='0', nbutton='0')
@@ -123,6 +140,7 @@ def writeBoard():
     buttonMap.write(soundBoardPath + os.path.basename(boardList[boardLoop])+".xml", encoding='utf8', method='xml')
     print("writing button map file: " + soundBoardPath + os.path.basename(boardList[boardLoop])+".xml")
 
+
 def printFoundDirs():
     i = 0
     while i < len(boardList):
@@ -134,16 +152,60 @@ def setBoardHeight():
     global boardHeight
     boardHeight = len(soundList)
 
+def getButton():
+    global runs
+    global button
+    global ctrl
+    global shift
+    global alt
+    global soundButtonColor
+    global rainbowButtons
+    ctrl = "0"
+    shift = "0"
+    alt = "0"
+    #f13 = button 85
+    button = str(85 + runs)
+    runs +=1
+    if runs > 11:
+        ctrl = "1"
+        shift = "0"
+        alt = "0"
+        button = str(85 + runs - 11)
+    if runs > 22:
+        ctrl = "0"
+        shift = "1"
+        alt = "0"
+        button = str(85 + runs - 22)
+    if runs > 33:
+        ctrl = "0"
+        shift = "0"
+        alt = "1"
+        button = str(85 + runs - 33)
+    if runs > 44:
+        button = "0"
+        ctrl = "0"
+        shift = "0"
+        alt = "0"
+    if rainbowButtons == "True":
+        soundButtonColor +=1
+        if soundButtonColor > 8:
+            soundButtonColor = 0
+    if debug == "True":
+        print(button)
+        print(ctrl)
+        print(shift)
+        print(alt)
+
 getConfig()
 checkExisting()
 setBoardList()
 setWindow()
 printFoundDirs()
 
-
 #board Loop writes each seperate board
 boardLoop=0
 while boardLoop < len(boardList):
+    runs = 0
     soundPathMP3 = boardList[boardLoop] + "\\" + "*.mp3"
     soundPathWAV = boardList[boardLoop] + "\\" + "*.wav"
     soundList = glob.glob(soundPathMP3) + glob.glob(soundPathWAV)
