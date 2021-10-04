@@ -3,7 +3,10 @@
 # standard kbps:
 #32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320 kbps
 
-from mutagen.mp3 import MP3
+import wave
 
-f = MP3(musicfile)
-bitrate = f.info.bitrate / 1000
+musicfile = r"C:\Users\rblum\Google Drive\Game Files\soundBoard\Soundboards\Apex\moooore.wav"
+
+track = wave.open(musicfile)
+bitrate = track.getframerate() / 1000
+print(str(bitrate) + " kbps")
