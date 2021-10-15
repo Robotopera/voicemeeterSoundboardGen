@@ -9,14 +9,27 @@
 # 6 = dark blue
 # 7 = magenta
 # 8 = red
-#input soundBoard directory as soundBoardPath
-soundBoardPath = C:\Users\rblum\Google Drive\Game Files\soundBoard\Soundboards\
+
+#input soundBoard directory as soundBoardPath with a \ at the end
+soundBoardPath = C:\Users\robotopera\Documents\GoogleDrive\Game Files\soundBoard\Soundboards\
+
 #pick your colors
 boardButtonColor = 4
 currentBoardButtonColor = 5
 soundButtonColor = 0
-debug = False
+
+#set soundboard window position here or use the mouse position util
 xPosition = 2571
 yPosition = 100
+
+#set keyboard shortcuts?
 setKeyboardShortCuts = True
+
+#taste the rainbow?
 rainbowButtons = False
+
+#use the get position from mouse tool to set soundboard location
+getMousePositionForWindow = True
+
+#output looks real bad if this is true
+debug = False

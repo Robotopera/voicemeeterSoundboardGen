@@ -1,4 +1,4 @@
 [Window Config]
-xposition = 2676
-yposition = 153
+xposition = 2596
+yposition = 106
 
