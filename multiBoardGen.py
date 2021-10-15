@@ -39,8 +39,6 @@ def getConfig():
         configparser.read(configWindowLoc)
         xPosition = configparser.get('Window Config', 'xPosition')
         yPosition = configparser.get('Window Config', 'yPosition')
-
-
 def checkExistingWindowConfig():
     configFilePath = os.path.abspath(os.path.join(os.path.dirname( __file__ ), 'windowConfig.txt'))
     testFileList = []
@@ -49,17 +47,14 @@ def checkExistingWindowConfig():
         return False
     else:
         return True
-
 def setBoardList():
     global boardList
     print(soundBoardPath)
     boardList = glob.glob(soundBoardPath + "*" )
-
 def setWindow():
     global windowWidth
     windowWidth = 158 * len(boardList)
     print ("setting window to " + str(len(boardList)) + " columns with a width of " + str(windowWidth) + " pixels")
-
 def checkExisting():
     testFilePath = soundBoardPath + "*.xml"
     testFileList = []
@@ -78,7 +73,6 @@ def checkExisting():
             print("removing existing board map " + testFileList[i])
             os.remove(testFileList[i])
             i +=1
-
 def fitToGrid(n, b):
     digits = ""
     if n == 0:
@@ -90,7 +84,6 @@ def fitToGrid(n, b):
         n //= b
     digits = str(int(digits)+1)
     return digits
-
 def boardButton():
     MacroButton = ET.SubElement(MacroButtonConfiguration, 'MacroButton', index=indexNumber, type='0', color=buttonColor, key='0', ctrl='0', shift='0', alt='0', anyway='0', exclusive='0', trigger='0', xinput='0' )
     MB_MIDI = ET.SubElement( MacroButton, 'MB_MIDI', b1='00', b2='00', b3='00', b4='00', b5='00', b6='00')
@@ -105,7 +98,6 @@ def boardButton():
   #  MB_OnRequest.text = "Load(" + boardList[boardLoop] + os.path.basename(boardList[boardLoop]) + ".xml" + ")" #path to sound file.mp3
     MB_OnRequest.text = "Load(\"" + boardList[boardButtonLoop] + ".xml\"" + ")" #path to sound file.mp3
     MB_OffRequest = ET.SubElement( MacroButton, 'MB_OffRequest')
-
 def soundButton():
     global runs
     global button
@@ -136,26 +128,20 @@ def soundButton():
     MB_OnRequest = ET.SubElement( MacroButton, 'MB_OnRequest')
     MB_OnRequest.text = 'Recorder.load=' + "\"" +soundList[soundButtonLoop] + "\""  #path to sound file.mp3
     MB_OffRequest = ET.SubElement( MacroButton, 'MB_OffRequest')
-
-
 def writeBoard():
     buttonMap = ET.ElementTree(VBAudioVoicemeeterMacroButtonMap)
     ET.indent(buttonMap, space=" ", level=0)
     buttonMap.write(soundBoardPath + os.path.basename(boardList[boardLoop])+".xml", encoding='utf8', method='xml')
     print("writing button map file: " + soundBoardPath + os.path.basename(boardList[boardLoop])+".xml")
-
-
 def printFoundDirs():
     i = 0
     while i < len(boardList):
         print("found directory " + os.path.basename(boardList[i]))
         #print("writing button map file: " + soundBoardPath + os.path.basename(boardList[i])+".xml")
         i +=1
-
 def setBoardHeight():
     global boardHeight
     boardHeight = len(soundList)
-
 def getButton():
     global runs
     global button
@@ -201,7 +187,6 @@ def getButton():
         print(alt)
 class POINT(Structure):
     _fields_ = [("x", c_long), ("y", c_long)]
-
 def checkExistingWindowConfig():
     configFilePath = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'windowConfig.txt'))
     testFileList = []
@@ -210,13 +195,11 @@ def checkExistingWindowConfig():
         return False
     else:
         return True
-
 def queryMousePosition():
     global pt
     pt = POINT()
     windll.user32.GetCursorPos(byref(pt))
     return { "x": pt.x, "y": pt.y}
-
 def writeConfig():
     configFilePath = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'windowConfig.txt'))
     if checkExistingWindowConfig():
@@ -237,7 +220,6 @@ def writeConfig():
     f = open(configFilePath, "w")
     print("writing Window Config to " + configFilePath)
     configparser.write(f)
-
 def getMouse():
     seconds = 0
     print ("getting mouse position, place mouse where you want the top left of the button panel to be located")
