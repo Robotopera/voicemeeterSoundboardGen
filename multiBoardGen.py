@@ -22,6 +22,12 @@ def getConfig():
     global setKeyboardShortCuts
     global rainbowButtons
     global getMousePositionForWindow
+    global macroPadWidth
+    global macroPadHeight
+    global macroPadShiftKey
+    global macroPadAltKey
+    global macropadCTRLKey
+
     soundBoardPath = configparser.get('Config File', 'soundBoardPath')
     boardButtonColor = configparser.get('Config File', 'boardButtonColor')
     currentBoardButtonColor = configparser.get('Config File', 'currentBoardButtonColor')
@@ -32,6 +38,11 @@ def getConfig():
     setKeyboardShortCuts = configparser.get('Config File', 'setKeyboardShortCuts')
     rainbowButtons = configparser.get('Config File', 'rainbowButtons')
     getMousePositionForWindow = configparser.get('Config File', 'getMousePositionForWindow')
+    macroPadWidth = configparser.get('Config File', 'macroPadWidth')
+    macroPadHeight = configparser.get('Config File', 'macroPadHeight')
+    macroPadShiftKey = configparser.get('Config File', 'macroPadShiftKey')
+    macroPadAltKey = configparser.get('Config File', 'macroPadAltKey')
+    macroPadCTRLKey = configparser.get('Config File', 'macropadCTRLKey')
     if rainbowButtons == "True":
         soundButtonColor = 0
     if checkExistingWindowConfig():
@@ -157,13 +168,13 @@ def getButton():
     button = str(85 + runs)
     runs +=1
     if runs > 11:
-        ctrl = "1"
-        shift = "0"
+        ctrl = "0"
+        shift = "1"
         alt = "0"
         button = str(85 + runs - 11)
     if runs > 22:
-        ctrl = "0"
-        shift = "1"
+        ctrl = "1"
+        shift = "0"
         alt = "0"
         button = str(85 + runs - 22)
     if runs > 33:

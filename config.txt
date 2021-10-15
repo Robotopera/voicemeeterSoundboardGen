@@ -31,5 +31,20 @@ rainbowButtons = False
 #use the get position from mouse tool to set soundboard location
 getMousePositionForWindow = True
 
+#set the width of your macroPad in buttons
+macroPadWidth = 4
+
+#set the height of your macroPad in buttons
+macroPadHeight = 2
+
+# set the macroPadShiftKey in key # starting at 0
+macroPadShiftKey = 7
+
+#set the macroPadAltKey in key # starting at 0
+macroPadAltKey = False
+
+#set the macropadCTRLKey in key # starting at 0
+macroPadCTRLKey = False
+
 #output looks real bad if this is true
 debug = False
